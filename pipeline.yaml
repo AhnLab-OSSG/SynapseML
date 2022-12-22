@@ -67,7 +67,7 @@ jobs:
         azureSubscription: 'MMLSpark Build'
         scriptType: bash
         scriptLocation: inlineScript
-        inlineScript: 'sbt publish'
+        inlineScript: 'sbt aetherDeploy'
       env:
         DEPLOYMENT_NAME: $(Build.Repository.Name)-$(Build.BuildId)
 
@@ -91,7 +91,7 @@ jobs:
         sudo apt-get install graphviz doxygen -y
         source activate synapseml
         sbt packagePython
-        sbt publish publishBlob publishDocs publishR publishPython
+        sbt aetherDeploy publishBlob publishDocs publishR publishPython
         sbt publishSigned
         sbt genBuildInfo
         echo "##vso[task.uploadsummary]$(pwd)/target/Build.md"
