@@ -65,6 +65,7 @@ jobs:
       displayName: 'Publish Library to Internal Feed'
       inputs:
         azureSubscription: 'MMLSpark Build'
+        scriptType: bash
         scriptLocation: inlineScript
         inlineScript: 'sbt publish'
       env:
