@@ -53,7 +53,7 @@ jobs:
 
 - job: PublishFeed
   pool:
-    vmImage: ubuntu-16.04
+    vmImage: ubuntu-20.04
   steps:
     - task: MavenAuthenticate@0
       name: mavenAuthPublicPackages
@@ -61,7 +61,7 @@ jobs:
       inputs:
         artifactsFeeds: A365_PublicPackages
         mavenServiceConnections: A365_PublicPackages-Feed-Connection
-    - task: AzureCLI@1
+    - task: AzureCLI@2
       displayName: 'Publish Library to Internal Feed'
       inputs:
         azureSubscription: 'MMLSpark Build'
