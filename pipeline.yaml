@@ -64,7 +64,7 @@ jobs:
     - task: AzureCLI@1
       displayName: 'Publish Library to Internal Feed'
       inputs:
-        azureSubscription: 'Azure Search Development_563598 (06454cd3-0dcd-4542-aec7-237a0b4c0fae)'
+        azureSubscription: 'MMLSpark Build'
         scriptLocation: inlineScript
         inlineScript: 'sbt publish'
       env:
