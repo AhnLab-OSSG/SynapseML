@@ -478,11 +478,14 @@ testWebsiteDocs := {
   )
 }
 
-publishTo := Some("A365_PublicPackages" at "https://msdata.pkgs.visualstudio.com/A365/_packaging/" +
-  "A365_PublicPackages/maven/v1")
-publishMavenStyle := true
+val publishFeed = TaskKey[Unit]("publishFeed", "publish library to internal feed")
+publishFeed := {
+  Some("A365_PublicPackages" at "https://msdata.pkgs.visualstudio.com/A365/_packaging/" +
+    "A365_PublicPackages/maven/v1")
+  publishMavenStyle := true
 
-credentials += Credentials(
-  "",
-  "msdata.pkgs.visualstudio.com",
-  "msdata", Secrets.adoFeedToken)
+  credentials += Credentials(
+    "",
+    "msdata.pkgs.visualstudio.com",
+    "msdata", Secrets.adoFeedToken)
+}
