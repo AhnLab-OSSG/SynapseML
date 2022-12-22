@@ -478,6 +478,7 @@ testWebsiteDocs := {
   )
 }
 
+// scalastyle:off line.size.limit
 publishTo := Some("A365_PublicPackages" at "https://msdata.pkgs.visualstudio.com/A365/_packaging/" +
   "A365_PublicPackages/maven/v1")
 publishMavenStyle := true
@@ -486,3 +487,4 @@ credentials += Credentials(
   "A365_PublicPackages Feed",
   "msdata.pkgs.visualstudio.com",
   "msdata", ${Secrets.adoFeedToken})
+// scalastyle:on line.size.limit
