@@ -51,25 +51,25 @@ jobs:
         black --diff --color . && black --check -q .
       displayName: 'Python Style Check'
 
-- job: PublishFeed
-  pool:
-    vmImage: ubuntu-20.04
-  steps:
-    - task: MavenAuthenticate@0
-      name: mavenAuthPublicPackages
-      displayName: Authenticate with A365_PublicPackages
-      inputs:
-        artifactsFeeds: A365_PublicPackages
-        mavenServiceConnections: A365_PublicPackages-Feed-Connection
-    - task: AzureCLI@2
-      displayName: 'Publish Library to Internal Feed'
-      inputs:
-        azureSubscription: 'MMLSpark Build'
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: 'sbt publish'
-      env:
-        DEPLOYMENT_NAME: $(Build.Repository.Name)-$(Build.BuildId)
+#- job: PublishFeed
+#  pool:
+#    vmImage: ubuntu-20.04
+#  steps:
+#    - task: MavenAuthenticate@0
+#      name: mavenAuthPublicPackages
+#      displayName: Authenticate with A365_PublicPackages
+#      inputs:
+#        artifactsFeeds: A365_PublicPackages
+#        mavenServiceConnections: A365_PublicPackages-Feed-Connection
+#    - task: AzureCLI@2
+#      displayName: 'Publish Library to Internal Feed'
+#      inputs:
+#        azureSubscription: 'MMLSpark Build'
+#        scriptType: bash
+#        scriptLocation: inlineScript
+#        inlineScript: 'sbt publish'
+#      env:
+#        DEPLOYMENT_NAME: $(Build.Repository.Name)-$(Build.BuildId)
 
 - job: Publish
   cancelTimeoutInMinutes: 0
@@ -85,12 +85,13 @@ jobs:
         sudo apt-get install graphviz doxygen -y
         source activate synapseml
         sbt packagePython
-        sbt publishBlob publishDocs publishR publishPython
+        sbt publish publishBlob publishDocs publishR publishPython
         sbt publishSigned
         sbt genBuildInfo
         echo "##vso[task.uploadsummary]$(pwd)/target/Build.md"
       displayName: Publish Artifacts
       env:
+        ADO-FEED-TOKEN: $(ado-feed-token)
         STORAGE-KEY: $(storage-key)
         NEXUS-UN: $(nexus-un)
         NEXUS-PW: $(nexus-pw)
