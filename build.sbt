@@ -486,7 +486,7 @@ resolvers += "A365_PublicPackages" at
   "https://msdata.pkgs.visualstudio.com/A365/_packaging/A365_PublicPackages/maven/v1"
 ThisBuild / useCoursier := false
 credentials += Credentials(
-  null,
+  "",
   "msdata.pkgs.visualstudio.com",
   "msdata", Secrets.adoFeedToken)
 
