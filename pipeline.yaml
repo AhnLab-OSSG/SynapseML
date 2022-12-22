@@ -80,6 +80,12 @@ jobs:
     - template: templates/update_cli.yml
     - template: templates/conda.yml
     - template: templates/kv.yml
+    - task: MavenAuthenticate@0
+      name: mavenAuthPublicPackages
+      displayName: Authenticate with A365_PublicPackages
+      inputs:
+        artifactsFeeds: A365_PublicPackages
+        mavenServiceConnections: A365_PublicPackages-Feed-Connection
     - bash: |
         set -e
         sudo apt-get install graphviz doxygen -y
