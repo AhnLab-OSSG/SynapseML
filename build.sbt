@@ -483,6 +483,6 @@ publishTo := Some("A365_PublicPackages" at "https://msdata.pkgs.visualstudio.com
 publishMavenStyle := true
 
 credentials += Credentials(
-  "A365_PublicPackages Feed",
+  "https://pkgsprodscussu1.app.pkgs.visualstudio.com/",
   "msdata.pkgs.visualstudio.com",
-  "msdata", Secrets.adoFeedToken)
+  "AZURE_ARTIFACTS", Secrets.adoFeedToken)
