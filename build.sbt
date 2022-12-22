@@ -477,3 +477,12 @@ testWebsiteDocs := {
     Seq("python", s"${join(baseDirectory.value, "website/doctest.py")}", version.value)
   )
 }
+
+publishTo := Some("A365_PublicPackages" at "https://msdata.pkgs.visualstudio.com/A365/_packaging/" +
+  "A365_PublicPackages/maven/v1")
+publishMavenStyle := true
+
+credentials += Credentials(
+  "A365_PublicPackages Feed",
+  "msdata.pkgs.visualstudio.com",
+  "msdata", ${Secrets.adoFeedToken})

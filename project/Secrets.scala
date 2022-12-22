@@ -157,6 +157,7 @@ object Secrets {
     }
   }
 
+  lazy val adoFeedToken: String = getSecret(ADOFeedTokenEnvVarName, ADOFeedTokenSecretName)
   lazy val nexusUsername: String = getSecret(NexusUsernameEnvVarName, NexusUsernameSecretName)
   lazy val nexusPassword: String = getSecret(NexusPasswordEnvVarName, NexusPasswordSecretName)
   lazy val pgpPassword: String = getSecret(PgpPasswordEnvVarName, PgpPasswordSecretName)
@@ -166,6 +167,8 @@ object Secrets {
   lazy val pgpPrivateFile: File = getPgpSecretFile(PgpPrivateSecretName, PgpPrivateEnvVarName)
   lazy val pgpPublicFile: File = getPgpSecretFile(PgpPublicSecretName, PgpPublicEnvVarName)
 
+  val ADOFeedTokenSecretName: String = "ado-feed-token"
+  val ADOFeedTokenEnvVarName: String = "ADO-FEED-TOKEN"
   val NexusUsernameSecretName: String = "nexus-un"
   val NexusUsernameEnvVarName: String = "NEXUS-UN"
   val NexusPasswordSecretName: String = "nexus-pw"
