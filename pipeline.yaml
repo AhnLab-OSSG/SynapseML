@@ -58,10 +58,10 @@ jobs:
     - template: templates/kv.yml
     - task: MavenAuthenticate@0
       name: mavenAuthPublicPackages
-      displayName: Authenticate with A365_PublicPackages
+      displayName: Authenticate with SynapseML_PublicPackages
       inputs:
-        artifactsFeeds: A365_PublicPackages
-        mavenServiceConnections: A365_PublicPackages-Feed-Connection
+        artifactsFeeds: SynapseML_PublicPackages
+        mavenServiceConnections: SynapseML_PublicPackages-Feed-Connection
     - task: AzureCLI@2
       displayName: 'Publish Library to Internal Feed'
       inputs:
@@ -91,10 +91,10 @@ jobs:
     - template: templates/kv.yml
     - task: MavenAuthenticate@0
       name: mavenAuthPublicPackages
-      displayName: Authenticate with A365_PublicPackages
+      displayName: Authenticate with SynapseML_PublicPackages
       inputs:
-        artifactsFeeds: A365_PublicPackages
-        mavenServiceConnections: A365_PublicPackages-Feed-Connection
+        artifactsFeeds: SynapseML_PublicPackages
+        mavenServiceConnections: SynapseML_PublicPackages-Feed-Connection
     - bash: |
         set -e
         sudo apt-get install graphviz doxygen -y
