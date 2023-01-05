@@ -55,6 +55,10 @@ jobs:
   pool:
     vmImage: ubuntu-20.04
   steps:
+    #- template: templates/ivy_cache.yml
+    - template: templates/update_cli.yml
+    - template: templates/conda.yml
+    - template: templates/kv.yml
     - task: MavenAuthenticate@0
       name: mavenAuthPublicPackages
       displayName: Authenticate with A365_PublicPackages
@@ -70,6 +74,14 @@ jobs:
         inlineScript: 'sbt aetherDeploy'
       env:
         DEPLOYMENT_NAME: $(Build.Repository.Name)-$(Build.BuildId)
+        ADO-FEED-TOKEN: $(ado-feed-token)
+        STORAGE-KEY: $(storage-key)
+        NEXUS-UN: $(nexus-un)
+        NEXUS-PW: $(nexus-pw)
+        PGP-PRIVATE: $(pgp-private)
+        PGP-PUBLIC: $(pgp-public)
+        PGP-PW: $(pgp-pw)
+        SYNAPSEML_ENABLE_PUBLISH: true
 
 - job: Publish
   cancelTimeoutInMinutes: 0
