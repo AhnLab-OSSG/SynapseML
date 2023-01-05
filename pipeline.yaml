@@ -55,9 +55,6 @@ jobs:
   pool:
     vmImage: ubuntu-20.04
   steps:
-    #- template: templates/ivy_cache.yml
-    - template: templates/update_cli.yml
-    - template: templates/conda.yml
     - template: templates/kv.yml
     - task: MavenAuthenticate@0
       name: mavenAuthPublicPackages
