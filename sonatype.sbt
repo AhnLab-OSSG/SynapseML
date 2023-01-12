@@ -31,7 +31,7 @@ pgpPassphrase := Some(Secrets.pgpPassword.toCharArray)
 pgpSecretRing := Secrets.pgpPrivateFile
 pgpPublicRing := Secrets.pgpPublicFile
 
-ThisBuild / publishTo := sonatypePublishToBundle.value
+//ThisBuild / publishTo := sonatypePublishToBundle.value
 
 ThisBuild / dynverSonatypeSnapshots := true
 ThisBuild / dynverSeparator := "-"

@@ -1,6 +1,7 @@
 import BuildUtils._
 import org.apache.commons.io.FileUtils
 import sbt.ExclusionRule
+import sbt.Keys.resolvers
 
 import java.io.File
 import java.net.URL
@@ -438,8 +439,8 @@ lazy val opencv = (project in file("opencv"))
     name := "synapseml-opencv"
   ): _*)
 
-//val azureRepo = "SynapseML_PublicPackages" at
-//  "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
+val azureRepo = "SynapseML_PublicPackages" at
+  "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
 
 lazy val root = (project in file("."))
   .aggregate(core, deepLearning, cognitive, vw, lightgbm, opencv)
@@ -454,12 +455,13 @@ lazy val root = (project in file("."))
   .disablePlugins(CodegenPlugin)
   .settings(settings ++ Seq(
     name := "synapseml",
-//    credentials += Credentials(
-//      "",
-//      "msdata.pkgs.visualstudio.com",
-//      "msdata", Secrets.adoFeedToken),
-//      publishTo := Some(azureRepo),
-//      aetherDeploy := aetherDeploy.value.copy(resolverName = azureRepo.name),
+    credentials += Credentials(
+      "",
+      "msdata.pkgs.visualstudio.com",
+      "msdata", Secrets.adoFeedToken),
+    ThisBuild / publishTo := Some(azureRepo),
+    ThisBuild / publishMavenStyle := true,
+    ThisBuild / useCoursier := false,
   ))
 
 val setupTask = TaskKey[Unit]("setup", "set up library for intellij")
@@ -488,14 +490,14 @@ testWebsiteDocs := {
 }
 
 //val publishFeed = TaskKey[Unit]("publishFeed", "publish library to internal feed")
-ThisBuild / publishTo := Some("SynapseML_PublicPackages" at
-  "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1")
-publishMavenStyle := true
-resolvers += "SynapseML_PublicPackages" at
-  "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
-ThisBuild / useCoursier := false
-credentials += Credentials(
-  "",
-  "msdata.pkgs.visualstudio.com",
-  "msdata", Secrets.adoFeedToken)
+//ThisBuild / publishTo := Some("SynapseML_PublicPackages" at
+//  "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1")
+//publishMavenStyle := true
+//resolvers += "SynapseML_PublicPackages" at
+//  "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
+//ThisBuild / useCoursier := false
+//credentials += Credentials(
+//  "",
+//  "msdata.pkgs.visualstudio.com",
+//  "msdata", Secrets.adoFeedToken)
 
