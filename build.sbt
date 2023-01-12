@@ -455,7 +455,7 @@ lazy val root = (project in file("."))
   .disablePlugins(CodegenPlugin)
   .settings(settings ++ Seq(
     name := "synapseml",
-    credentials += Credentials(
+    ThisBuild / credentials += Credentials(
       "",
       "msdata.pkgs.visualstudio.com",
       "msdata", Secrets.adoFeedToken),
