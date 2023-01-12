@@ -89,24 +89,17 @@ jobs:
     - template: templates/update_cli.yml
     - template: templates/conda.yml
     - template: templates/kv.yml
-    - task: MavenAuthenticate@0
-      name: mavenAuthPublicPackages
-      displayName: Authenticate with SynapseML_PublicPackages
-      inputs:
-        artifactsFeeds: SynapseML_PublicPackages
-        mavenServiceConnections: SynapseML_PublicPackages-Feed-Connection
     - bash: |
         set -e
         sudo apt-get install graphviz doxygen -y
         source activate synapseml
         sbt packagePython
-        sbt aetherDeploy publishBlob publishDocs publishR publishPython
+        sbt publishBlob publishDocs publishR publishPython
         sbt publishSigned
         sbt genBuildInfo
         echo "##vso[task.uploadsummary]$(pwd)/target/Build.md"
       displayName: Publish Artifacts
       env:
-        ADO-FEED-TOKEN: $(ado-feed-token)
         STORAGE-KEY: $(storage-key)
         NEXUS-UN: $(nexus-un)
         NEXUS-PW: $(nexus-pw)
