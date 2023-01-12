@@ -438,6 +438,9 @@ lazy val opencv = (project in file("opencv"))
     name := "synapseml-opencv"
   ): _*)
 
+val azureRepo = "SynapseML_PublicPackages" at
+  "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
+
 lazy val root = (project in file("."))
   .aggregate(core, deepLearning, cognitive, vw, lightgbm, opencv)
   .dependsOn(
@@ -451,6 +454,12 @@ lazy val root = (project in file("."))
   .disablePlugins(CodegenPlugin)
   .settings(settings ++ Seq(
     name := "synapseml",
+    credentials += Credentials(
+      "",
+      "msdata.pkgs.visualstudio.com",
+      "msdata", Secrets.adoFeedToken),
+      publishTo := Some(azureRepo),
+      aetherDeploy := aetherDeploy.value.copy(resolverName = azureRepo.name),
   ))
 
 val setupTask = TaskKey[Unit]("setup", "set up library for intellij")
