@@ -1,7 +1,6 @@
 import BuildUtils._
 import org.apache.commons.io.FileUtils
 import sbt.ExclusionRule
-import sbt.Keys.resolvers
 
 import java.io.File
 import java.net.URL
