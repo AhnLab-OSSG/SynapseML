@@ -453,7 +453,9 @@ lazy val root = (project in file("."))
     opencv % "test->test;compile->compile")
   .enablePlugins(ScalaUnidocPlugin)
   .disablePlugins(CodegenPlugin)
-  .settings(settings ++ Seq(publishToFeed))
+  .settings(
+    commands ++= Seq(publishToFeed)
+  )
 
 val setupTask = TaskKey[Unit]("setup", "set up library for intellij")
 setupTask := {
