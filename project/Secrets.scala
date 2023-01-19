@@ -15,10 +15,8 @@ object Secrets {
   private val SubscriptionID = "e342c2c0-f844-4b18-9208-52c8c234c30e"
   private val PgpFileExtension = ".asc"
   private val EnablePublishEnvVar = "SYNAPSEML_ENABLE_PUBLISH"
-  private val PublishToFeed = "PUBLISH_TO_FEED"
 
   lazy private val publishingEnabled: Boolean = sys.env.getOrElse(EnablePublishEnvVar, "false").toBoolean
-  lazy private val publishToFeed: Boolean = sys.env.getOrElse(PublishToFeed, "false").toBoolean
 
   protected def exec(command: String): String = {
     val os = sys.props("os.name").toLowerCase
@@ -169,6 +167,8 @@ object Secrets {
   lazy val pgpPrivateFile: File = getPgpSecretFile(PgpPrivateSecretName, PgpPrivateEnvVarName)
   lazy val pgpPublicFile: File = getPgpSecretFile(PgpPublicSecretName, PgpPublicEnvVarName)
 
+  lazy val publishToFeed: Boolean = sys.env.getOrElse(PublishToFeed, "false").toBoolean
+
   val ADOFeedTokenSecretName: String = "ado-feed-token"
   val ADOFeedTokenEnvVarName: String = "ADO-FEED-TOKEN"
   val NexusUsernameSecretName: String = "nexus-un"
@@ -185,4 +185,5 @@ object Secrets {
   val StorageKeyEnvVarName: String = "STORAGE-KEY"
   val PypiApiSecretName: String = "pypi-api-token"
   val PypiApiEnvVarName: String = "PYPI-API-TOKEN"
+  val PublishToFeed: String = "PUBLISH_TO_FEED"
 }
