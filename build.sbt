@@ -1,5 +1,6 @@
 import BuildUtils._
 import org.apache.commons.io.FileUtils
+import sbt.Command.command
 import sbt.ExclusionRule
 
 import java.io.File
@@ -452,16 +453,7 @@ lazy val root = (project in file("."))
     opencv % "test->test;compile->compile")
   .enablePlugins(ScalaUnidocPlugin)
   .disablePlugins(CodegenPlugin)
-  .settings(settings ++ Seq(
-    name := "synapseml",
-    ThisBuild / credentials += Credentials(
-      "",
-      "msdata.pkgs.visualstudio.com",
-      "msdata", Secrets.adoFeedToken),
-    ThisBuild / publishTo := Some(azureRepo),
-    ThisBuild / publishMavenStyle := true,
-    ThisBuild / useCoursier := false,
-  ))
+  .settings(settings ++ Seq(publishToFeed))
 
 val setupTask = TaskKey[Unit]("setup", "set up library for intellij")
 setupTask := {
@@ -500,7 +492,7 @@ testWebsiteDocs := {
 //  "msdata.pkgs.visualstudio.com",
 //  "msdata", Secrets.adoFeedToken)
 
-commands += Command.command("publishToFeed") { state =>
+val publishToFeed = Command.command("publishToFeed") { state =>
   val extracted = Project.extract(state)
   Project.runTask(
     Compile / publish,
