@@ -507,13 +507,12 @@ def publishToFeed = Command.command("publishToFeed") { state =>
     extracted.appendWithSession(List(
       publishTo := Some("SynapseML_PublicPackages" at
         "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"),
-      credentials += Credentials(
+      ThisBuild / credentials += Credentials(
         "",
         "msdata.pkgs.visualstudio.com",
         "msdata", Secrets.adoFeedToken),
-      publishMavenStyle := true,
-      useCoursier := false,
-      publishMavenStyle := true
+      ThisBuild / publishMavenStyle := true,
+      ThisBuild / useCoursier := false
     ), state),
     true
   )
