@@ -380,7 +380,6 @@ val settings = Seq(
   sbtPlugin := false
 )
 ThisBuild / publishMavenStyle := true
-ThisBuild / useCoursier := false
 
 lazy val core = (project in file("core"))
   .enablePlugins(BuildInfoPlugin)
@@ -452,6 +451,11 @@ lazy val root = (project in file("."))
   .disablePlugins(CodegenPlugin)
   .settings(settings ++ Seq(
     name := "synapseml",
+    ThisBuild / credentials += Credentials(
+      "",
+      "msdata.pkgs.visualstudio.com",
+      "msdata", Secrets.adoFeedToken),
+    ThisBuild / useCoursier := false
   ))
 
 val setupTask = TaskKey[Unit]("setup", "set up library for intellij")

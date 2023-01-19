@@ -22,6 +22,11 @@ ThisBuild / developers := List(
 
 ThisBuild / licenses += ("MIT", url("https://github.com/Microsoft/SynapseML/blob/master/LICENSE"))
 
+ThisBuild / credentials += Credentials("Sonatype Nexus Repository Manager",
+  "oss.sonatype.org",
+  Secrets.nexusUsername,
+  Secrets.nexusPassword)
+
 pgpPassphrase := Some(Secrets.pgpPassword.toCharArray)
 pgpSecretRing := Secrets.pgpPrivateFile
 pgpPublicRing := Secrets.pgpPublicFile
@@ -30,20 +35,9 @@ ThisBuild / dynverSonatypeSnapshots := true
 ThisBuild / dynverSeparator := "-"
 
 if(Secrets.publishToFeed) {
-  ThisBuild / credentials += Credentials(
-    "",
-    "msdata.pkgs.visualstudio.com",
-    "msdata", Secrets.adoFeedToken)
-
   val azureRepo = "SynapseML_PublicPackages" at
     "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
-
   ThisBuild / publishTo := Some(azureRepo)
 } else {
-  ThisBuild / credentials += Credentials("Sonatype Nexus Repository Manager",
-    "oss.sonatype.org",
-    Secrets.nexusUsername,
-    Secrets.nexusPassword)
-
   ThisBuild / publishTo := sonatypePublishToBundle.value
 }
