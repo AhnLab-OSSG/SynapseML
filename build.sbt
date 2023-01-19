@@ -503,9 +503,18 @@ testWebsiteDocs := {
 def publishToFeed = Command.command("publishToFeed") { state =>
   val extracted = Project.extract(state)
   Project.runTask(
-    publish in Compile,
-    extracted.append(List(publishTo := Some("SynapseML_PublicPackages" at
-        "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1")), state),
+    Compile / publish,
+    extracted.appendWithSession(List(
+      publishTo := Some("SynapseML_PublicPackages" at
+        "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"),
+      credentials += Credentials(
+        "",
+        "msdata.pkgs.visualstudio.com",
+        "msdata", Secrets.adoFeedToken),
+      publishMavenStyle := true,
+      useCoursier := false,
+      publishMavenStyle := true
+    ), state),
     true
   )
   state
