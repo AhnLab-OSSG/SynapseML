@@ -82,3 +82,4 @@ jobs:
         ADO-FEED-TOKEN: $(ado-feed-token)
         STORAGE-KEY: $(storage-key)
         PUBLISH_TO_FEED: true
+        SYNAPSEML_ENABLE_PUBLISH: true
