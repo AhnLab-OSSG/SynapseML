@@ -508,10 +508,7 @@ val publishToFeed = Command.command("publishToFeed") { state =>
           resolvers += "SynapseML_PublicPackages" at
           "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
         } ++ { publishMavenStyle := true } ++ { useCoursier := false }
-  val result = extracted.runTask(
-    aetherDeploy,
-    extracted.appendWithSession(publishSettings, state),
-    state
-  )
+  val updatedSettings = extracted.appendWithSession(publishSettings, state)
+  val result = Project.extract(updatedSettings).runTask(aetherDeploy, updatedSettings)
   result
 }
