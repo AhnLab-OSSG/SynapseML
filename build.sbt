@@ -509,6 +509,6 @@ val publishToFeed = Command.command("publishToFeed") { state =>
           "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
         } ++ { publishMavenStyle := true } ++ { useCoursier := false }
   val updatedSettings = extracted.appendWithSession(publishSettings, state)
-  val result = Project.extract(updatedSettings).runTask(Compile / publish, updatedSettings)
+  val (result, _) = Project.extract(updatedSettings).runTask(Compile / publish, updatedSettings)
   result
 }
