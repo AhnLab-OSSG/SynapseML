@@ -504,6 +504,9 @@ val publishToFeed = Command.command("publishToFeed") { state =>
             "",
             "msdata.pkgs.visualstudio.com",
             "msdata", Secrets.adoFeedToken)
+        } ++ {
+          resolvers += "SynapseML_PublicPackages" at
+          "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
         } ++ { publishMavenStyle := true } ++ { useCoursier := false }
   Project.runTask(
     Compile / publish,
@@ -512,4 +515,3 @@ val publishToFeed = Command.command("publishToFeed") { state =>
   )
   state
 }
-commands += publishToFeed
