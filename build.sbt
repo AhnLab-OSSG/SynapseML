@@ -7,6 +7,8 @@ import java.io.File
 import java.net.URL
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
+import no.arktekk.sbt.Aether._
+import no.arktekk.sbt.Aether.AetherKeys._
 
 val condaEnvName = "synapseml"
 val sparkVersion = "3.2.3"
@@ -508,10 +510,10 @@ val publishToFeed = Command.command("publishToFeed") { state =>
           resolvers += "SynapseML_PublicPackages" at
           "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
         } ++ { publishMavenStyle := true } ++ { useCoursier := false }
-  Project.runTask(
-    Compile / aetherDeploy,
+  val result = extracted.runTask(
+    aetherDeploy,
     extracted.appendWithSession(publishSettings, state),
     true
   )
-  state
+  result
 }
