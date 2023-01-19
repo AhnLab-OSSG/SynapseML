@@ -453,9 +453,9 @@ lazy val root = (project in file("."))
     opencv % "test->test;compile->compile")
   .enablePlugins(ScalaUnidocPlugin)
   .disablePlugins(CodegenPlugin)
-  .settings(
+  .settings(settings ++ Seq(
     commands ++= Seq(publishToFeed)
-  )
+  ))
 
 val setupTask = TaskKey[Unit]("setup", "set up library for intellij")
 setupTask := {
@@ -499,14 +499,14 @@ val publishToFeed = Command.command("publishToFeed") { state =>
   Project.runTask(
     Compile / publish,
     extracted.appendWithSession(List(
-      publishTo := Some("SynapseML_PublicPackages" at
+      ThisBuild / publishTo := Some("SynapseML_PublicPackages" at
         "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"),
-      credentials += Credentials(
+      ThisBuild / credentials += Credentials(
         "",
         "msdata.pkgs.visualstudio.com",
         "msdata", Secrets.adoFeedToken),
-      publishMavenStyle := true,
-      useCoursier := false
+      ThisBuild / publishMavenStyle := true,
+      ThisBuild / useCoursier := false
     ), state),
     true
   )
