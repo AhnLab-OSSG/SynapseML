@@ -68,7 +68,7 @@ jobs:
         azureSubscription: 'MMLSpark Build'
         scriptType: bash
         scriptLocation: inlineScript
-        inlineScript: 'sbt publishToFeed'
+        inlineScript: 'sbt publish publishToFeed'
       env:
         DEPLOYMENT_NAME: $(Build.Repository.Name)-$(Build.BuildId)
         ADO-FEED-TOKEN: $(ado-feed-token)
