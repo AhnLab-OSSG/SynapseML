@@ -62,13 +62,10 @@ jobs:
       inputs:
         artifactsFeeds: SynapseML_PublicPackages
         mavenServiceConnections: SynapseML_PublicPackages-Feed-Connection
-    - task: AzureCLI@2
-      displayName: 'Publish Library to Internal Feed'
-      inputs:
-        azureSubscription: 'MMLSpark Build'
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: 'sbt aetherDeploy'
+    - bash: |
+        set -e
+        sbt aetherDeploy
+      displayName: Publish Library to Internal Feed
       env:
         DEPLOYMENT_NAME: $(Build.Repository.Name)-$(Build.BuildId)
         ADO-FEED-TOKEN: $(ado-feed-token)
