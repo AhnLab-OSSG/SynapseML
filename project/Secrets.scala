@@ -15,8 +15,10 @@ object Secrets {
   private val SubscriptionID = "e342c2c0-f844-4b18-9208-52c8c234c30e"
   private val PgpFileExtension = ".asc"
   private val EnablePublishEnvVar = "SYNAPSEML_ENABLE_PUBLISH"
+  private val PublishToFeed = "PUBLISH_TO_FEED"
 
   lazy private val publishingEnabled: Boolean = sys.env.getOrElse(EnablePublishEnvVar, "false").toBoolean
+  lazy private val publishToFeed: Boolean = sys.env.getOrElse(PublishToFeed, "false").toBoolean
 
   protected def exec(command: String): String = {
     val os = sys.props("os.name").toLowerCase

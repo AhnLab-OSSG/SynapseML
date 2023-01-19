@@ -79,3 +79,4 @@ jobs:
         PGP-PUBLIC: $(pgp-public)
         PGP-PW: $(pgp-pw)
         SYNAPSEML_ENABLE_PUBLISH: true
+        PUBLISH_TO_FEED: true
