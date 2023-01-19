@@ -499,7 +499,7 @@ val publishToFeed = Command.command("publishToFeed") { state =>
   val publishSettings = {
         publishTo := Some("SynapseML_PublicPackages" at "https://msdata.pkgs.visualstudio.com/A365/" +
           "_packaging/SynapseML_PublicPackages/maven/v1")
-        } ++ { scalaVersion := "2.13.1" } ++ {
+        } ++ {
           credentials += Credentials(
             "",
             "msdata.pkgs.visualstudio.com",
