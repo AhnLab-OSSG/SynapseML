@@ -509,7 +509,7 @@ val publishToFeed = Command.command("publishToFeed") { state =>
           "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1"
         } ++ { publishMavenStyle := true } ++ { useCoursier := false }
   Project.runTask(
-    Compile / publish,
+    Compile / aetherDeploy,
     extracted.appendWithSession(publishSettings, state),
     true
   )
