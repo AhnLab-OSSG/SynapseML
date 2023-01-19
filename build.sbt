@@ -7,8 +7,6 @@ import java.io.File
 import java.net.URL
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 import scala.xml.{Node => XmlNode, NodeSeq => XmlNodeSeq, _}
-import no.arktekk.sbt.Aether._
-import no.arktekk.sbt.Aether.AetherKeys._
 
 val condaEnvName = "synapseml"
 val sparkVersion = "3.2.3"
@@ -513,7 +511,7 @@ val publishToFeed = Command.command("publishToFeed") { state =>
   val result = extracted.runTask(
     aetherDeploy,
     extracted.appendWithSession(publishSettings, state),
-    true
+    state
   )
   result
 }
