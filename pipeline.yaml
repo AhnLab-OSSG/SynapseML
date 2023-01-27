@@ -90,7 +90,7 @@ jobs:
       displayName: Create Anaconda environment
     - task: AzureKeyVault@1
       inputs:
-        azureSubscription: 'MMLSpark Connection 2'
+        azureSubscription: 'MMLSpark Build'
         keyVaultName: mmlspark-keys
     - bash: |
         source activate mmlspark
