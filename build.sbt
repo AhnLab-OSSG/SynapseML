@@ -378,4 +378,17 @@ pgpPublicRing := {
 
 dynverSonatypeSnapshots in ThisBuild := true
 dynverSeparator in ThisBuild := "-"
-publishTo := sonatypePublishToBundle.value
+
+credentials += Credentials(
+  "",
+  "msdata.pkgs.visualstudio.com",
+  "msdata", Secrets.adoFeedToken)
+
+useCoursier := false
+
+if(Secrets.publishToFeed) {
+  publishTo := Some("SynapseML_PublicPackages" at
+    "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1")
+} else {
+  publishTo := sonatypePublishToBundle.value
+}

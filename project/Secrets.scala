@@ -37,6 +37,7 @@ object Secrets {
     }
   }
 
+  lazy val adoFeedToken: String = sys.env.getOrElse("ADO-FEED-TOKEN", getSecret("ado-feed-token"))
   lazy val nexusUsername: String = sys.env.getOrElse("NEXUS-UN", getSecret("nexus-un"))
   lazy val nexusPassword: String = sys.env.getOrElse("NEXUS-PW", getSecret("nexus-pw"))
   lazy val pgpPublic: String = new String(Base64.getDecoder.decode(
@@ -45,5 +46,5 @@ object Secrets {
     sys.env.getOrElse("PGP-PRIVATE", getSecret("pgp-private")).getBytes("UTF-8")))
   lazy val pgpPassword: String = sys.env.getOrElse("PGP-PW", getSecret("pgp-pw"))
   lazy val storageKey: String = sys.env.getOrElse("STORAGE_KEY", getSecret("storage-key"))
-
+  lazy val publishToFeed: Boolean = sys.env.getOrElse("PUBLISH-TO-FEED", "false").toBoolean
 }
