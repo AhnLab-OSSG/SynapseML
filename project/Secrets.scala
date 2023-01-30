@@ -45,5 +45,6 @@ object Secrets {
     sys.env.getOrElse("PGP-PRIVATE", getSecret("pgp-private")).getBytes("UTF-8")))
   lazy val pgpPassword: String = sys.env.getOrElse("PGP-PW", getSecret("pgp-pw"))
   lazy val storageKey: String = sys.env.getOrElse("STORAGE_KEY", getSecret("storage-key"))
-
+  lazy val adoFeedToken: String = sys.env.getOrElse("ADO-FEED-TOKEN", getSecret("ado-feed-token"))
+  lazy val publishToFeed: Boolean = sys.env.getOrElse("PUBLISH-TO-FEED", "false").toBoolean
 }

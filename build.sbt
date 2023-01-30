@@ -360,6 +360,11 @@ credentials += Credentials("Sonatype Nexus Repository Manager",
   Secrets.nexusUsername,
   Secrets.nexusPassword)
 
+credentials += Credentials(
+  "",
+  "msdata.pkgs.visualstudio.com",
+  "msdata", Secrets.adoFeedToken)
+
 pgpPassphrase := Some(Secrets.pgpPassword.toCharArray)
 pgpSecretRing := {
   val temp = File.createTempFile("secret", ".asc")
@@ -378,4 +383,9 @@ pgpPublicRing := {
 
 dynverSonatypeSnapshots in ThisBuild := true
 dynverSeparator in ThisBuild := "-"
-publishTo := sonatypePublishToBundle.value
+if(Secrets.publishToFeed) {
+  publishTo := Some("SynapseML_PublicPackages" at
+    "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseML_PublicPackages/maven/v1")
+} else {
+  publishTo := sonatypePublishToBundle.value
+}
